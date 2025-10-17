@@ -1,0 +1,135 @@
+/* Estilos da página da carta */
+body.carta-page {
+    background: linear-gradient(135deg, #f9c5d1, #c2a0cd);
+    margin: 0;
+    height: 100vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-family: 'Arial', sans-serif;
+}
+
+.envelope-container {
+    position: relative;
+    width: 280px;
+    height: 200px;
+    cursor: pointer;
+}
+
+.envelope {
+    width: 100%;
+    height: 100%;
+    position: relative;
+}
+
+.corpo-envelope {
+    width: 100%;
+    height: 100%;
+    background: #ff6b8b;
+    position: absolute;
+    border-radius: 10px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
+}
+
+.tampa {
+    width: 100%;
+    height: 100%;
+    background: #ff4f6d;
+    position: absolute;
+    top: 0;
+    left: 0;
+    border-radius: 10px;
+    transform-origin: top;
+    transition: transform 0.6s ease-in-out;
+    z-index: 2;
+    clip-path: polygon(0 0, 100% 0, 50% 50%);
+}
+
+.carta {
+    width: 90%;
+    height: 85%;
+    background: linear-gradient(to bottom, #fffaf0, #fff);
+    position: absolute;
+    top: 5%;
+    left: 5%;
+    border-radius: 8px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+    font-size: 16px;
+    font-weight: 500;
+    color: #333;
+    padding: 15px;
+    box-sizing: border-box;
+    opacity: 0;
+    transform: translateY(20px) scale(0.9);
+    transition: all 0.6s ease-in-out;
+    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+    z-index: 1;
+    line-height: 1.4;
+    overflow: hidden;
+}
+
+.coração {
+    font-size: 40px;
+    color: white;
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    z-index: 3;
+    transition: transform 0.3s ease;
+}
+
+/* Quando o envelope está aberto */
+.envelope-container.aberto .tampa {
+    transform: rotateX(180deg);
+}
+
+.envelope-container.aberto .carta {
+    opacity: 1;
+    transform: translateY(-15px) scale(1);
+}
+
+.envelope-container.aberto .coração {
+    transform: translate(-50%, -50%) scale(0.8);
+    opacity: 0.7;
+}
+
+/* Animação para trocar mensagens */
+@keyframes pulsar {
+    0% { transform: translateY(-15px) scale(1); }
+    50% { transform: translateY(-15px) scale(1.05); }
+    100% { transform: translateY(-15px) scale(1); }
+}
+
+.carta {
+    animation: none;
+}
+
+/* Efeito hover */
+.envelope-container:hover .coração {
+    transform: translate(-50%, -50%) scale(1.1);
+}
+
+.envelope-container:hover .corpo-envelope {
+    background: #ff5a7d;
+}
+
+/* Instrução para o usuário */
+.envelope-container::after {
+    content: "Clique para abrir e toque novamente para uma nova mensagem!";
+    position: absolute;
+    top: -60px;
+    left: 50%;
+    transform: translateX(-50%);
+    color: #666;
+    font-size: 12px;
+    text-align: center;
+    width: 200px;
+    opacity: 0.8;
+}
