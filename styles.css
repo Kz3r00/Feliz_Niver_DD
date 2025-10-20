@@ -1,0 +1,190 @@
+/* Reset e estilos base */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body.carta-page {
+    background: linear-gradient(135deg, #ffe8f0, #d4c4fb);
+    margin: 0;
+    min-height: 100vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-family: 'Georgia', 'Times New Roman', serif;
+    padding: 20px;
+}
+
+.container {
+    text-align: center;
+    max-width: 500px;
+    width: 100%;
+}
+
+h1 {
+    color: #8b5aa0;
+    margin-bottom: 30px;
+    font-size: 2.2em;
+    text-shadow: 1px 1px 2px rgba(0,0,0,0.1);
+}
+
+.envelope-container {
+    position: relative;
+    width: 280px;
+    height: 200px;
+    cursor: pointer;
+    margin: 0 auto 40px;
+}
+
+.envelope {
+    width: 100%;
+    height: 100%;
+    position: relative;
+}
+
+.corpo-envelope {
+    width: 100%;
+    height: 100%;
+    background: #ff85a2;
+    position: absolute;
+    border-radius: 10px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    box-shadow: 0 6px 20px rgba(0, 0, 0, 0.15);
+}
+
+.tampa {
+    width: 100%;
+    height: 100%;
+    background: #ff6b8b;
+    position: absolute;
+    top: 0;
+    left: 0;
+    border-radius: 10px;
+    transform-origin: top;
+    transition: transform 0.6s ease-in-out;
+    z-index: 2;
+    clip-path: polygon(0 0, 100% 0, 50% 50%);
+}
+
+.carta {
+    width: 90%;
+    height: 85%;
+    background: linear-gradient(to bottom, #fffaf0, #fff5f5);
+    position: absolute;
+    top: 5%;
+    left: 5%;
+    border-radius: 8px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+    font-size: 16px;
+    font-weight: 500;
+    color: #5a5a5a;
+    padding: 20px;
+    box-sizing: border-box;
+    opacity: 0;
+    transform: translateY(20px) scale(0.9);
+    transition: all 0.6s ease-in-out;
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+    z-index: 1;
+    line-height: 1.5;
+    overflow: hidden;
+    border: 1px solid #ffd1dc;
+}
+
+.coracao {
+    font-size: 45px;
+    color: white;
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    z-index: 3;
+    transition: transform 0.3s ease;
+}
+
+/* Quando o envelope está aberto */
+.envelope-container.aberto .tampa {
+    transform: rotateX(180deg);
+}
+
+.envelope-container.aberto .carta {
+    opacity: 1;
+    transform: translateY(-15px) scale(1);
+}
+
+.envelope-container.aberto .coracao {
+    transform: translate(-50%, -50%) scale(0.8);
+    opacity: 0.7;
+}
+
+/* Animação para trocar mensagens */
+@keyframes pulsar {
+    0% { transform: translateY(-15px) scale(1); }
+    50% { transform: translateY(-15px) scale(1.05); }
+    100% { transform: translateY(-15px) scale(1); }
+}
+
+.carta {
+    animation: none;
+}
+
+/* Efeitos hover */
+.envelope-container:hover .coracao {
+    transform: translate(-50%, -50%) scale(1.1);
+}
+
+.envelope-container:hover .corpo-envelope {
+    background: #ff5a7d;
+}
+
+/* Mensagem final */
+.mensagem-final {
+    margin-top: 20px;
+    color: #7a5a8a;
+    font-style: italic;
+    font-size: 1.1em;
+    line-height: 1.6;
+}
+
+/* Instrução para o usuário */
+.envelope-container::after {
+    content: "Clique para abrir e toque novamente para novas mensagens!";
+    position: absolute;
+    top: -70px;
+    left: 50%;
+    transform: translateX(-50%);
+    color: #8b5aa0;
+    font-size: 13px;
+    text-align: center;
+    width: 220px;
+    opacity: 0.9;
+    font-weight: 500;
+}
+
+/* Responsividade */
+@media (max-width: 480px) {
+    h1 {
+        font-size: 1.8em;
+    }
+    
+    .envelope-container {
+        width: 250px;
+        height: 180px;
+    }
+    
+    .carta {
+        font-size: 15px;
+        padding: 15px;
+    }
+    
+    .envelope-container::after {
+        font-size: 12px;
+        width: 200px;
+        top: -60px;
+    }
+}
