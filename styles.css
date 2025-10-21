@@ -153,7 +153,7 @@ h1 {
 
 /* Instrução para o usuário */
 .envelope-container::after {
-    content: "Clique para abrir e toque novamente para novas mensagens!";
+    content: "Independente do que aconteça, sempre estarei aqui.";
     position: absolute;
     top: -70px;
     left: 50%;
