@@ -153,7 +153,7 @@ h1 {
 
 /* Instrução para o usuário */
 .envelope-container::after {
-    content: "Qualquer coisa e só chamar.";
+    content: "Meus parabéns.";
     position: absolute;
     top: -70px;
     left: 50%;
