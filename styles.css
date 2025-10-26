@@ -153,7 +153,7 @@ h1 {
 
 /* Instrução para o usuário */
 .envelope-container::after {
-    content: "Independente do que aconteça, sempre estarei aqui.";
+    content: "Qualquer coisa e só chamar.";
     position: absolute;
     top: -70px;
     left: 50%;
