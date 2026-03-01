@@ -1,5 +1,6 @@
 const mensagens = [
     "Feliz aniversário! Que este novo ciclo traga tudo de melhor para você!",
+    "Indepedente de qualquer coisa sempre vou te amar"
     "Desejo que sua vida seja repleta de alegrias, conquistas e momentos especiais!",
     "Que cada dia do seu novo ano de vida seja abençoado com felicidade e paz!",
     "Você merece todo o amor e felicidade do mundo! Tenha um dia maravilhoso!",
