@@ -1,3 +1,4 @@
+// Todas as mensagens românticas
 const mensagens = [
     "Feliz aniversário! Que este novo ciclo traga tudo de melhor para você!",
     "Indepedente de qualquer coisa sempre vou te amar"
@@ -32,48 +33,52 @@ const mensagens = [
     "Você é uma bênção na vida de quem te conhece! Feliz aniversário!"
 ];
 
-let envelopeAberto = false;
-let mensagensUsadas = [];
-let mensagemAtual = "";
+// Variáveis de controle
+let mensagensLidas = [];
+let cartaAberta = false;
 
-function obterMensagemAleatoria() {
-    if (mensagensUsadas.length >= mensagens.length) {
-        mensagensUsadas = [];
+// Função para pegar mensagem aleatória (sem repetir)
+function pegarMensagem() {
+    // Se já leu todas, recomeça
+    if (mensagensLidas.length === mensagens.length) {
+        mensagensLidas = [];
     }
     
-    const mensagensDisponiveis = mensagens.filter(msg => !mensagensUsadas.includes(msg));
+    // Filtra as mensagens ainda não lidas
+    const disponiveis = mensagens.filter(msg => !mensagensLidas.includes(msg));
     
-    if (mensagensDisponiveis.length === 0) {
-        return "Feliz aniversário mais uma vez! Você é incrível!";
-    }
+    // Escolhe uma aleatória
+    const escolhida = disponiveis[Math.floor(Math.random() * disponiveis.length)];
     
-    const mensagemAleatoria = mensagensDisponiveis[Math.floor(Math.random() * mensagensDisponiveis.length)];
-    mensagensUsadas.push(mensagemAleatoria);
+    // Marca como lida
+    mensagensLidas.push(escolhida);
     
-    return mensagemAleatoria;
+    return escolhida;
 }
 
+// Função principal - chamada ao clicar
 function abrirEnvelope() {
-    const envelopeContainer = document.querySelector('.envelope-container');
-    const mensagemElement = document.getElementById('mensagem');
+    const envelope = document.querySelector('.envelope-container');
+    const carta = document.getElementById('mensagem');
     
-    if (!envelopeAberto) {
-        envelopeContainer.classList.add('aberto');
-        mensagemAtual = obterMensagemAleatoria();
-        mensagemElement.textContent = mensagemAtual;
-        envelopeAberto = true;
+    // Se não estiver aberta ainda
+    if (!cartaAberta) {
+        // Abre o envelope
+        envelope.classList.add('aberto');
+        // Coloca a primeira mensagem
+        carta.textContent = pegarMensagem();
+        cartaAberta = true;
     } else {
-        mensagemAtual = obterMensagemAleatoria();
-        mensagemElement.textContent = mensagemAtual;
+        // Se já está aberta, só troca a mensagem
+        carta.textContent = pegarMensagem();
         
-        mensagemElement.style.animation = 'none';
+        // Pequena animação de pulsar
+        carta.style.animation = 'none';
         setTimeout(() => {
-            mensagemElement.style.animation = 'pulsar 0.5s ease-in-out';
+            carta.style.animation = 'pulsar 0.5s ease-in-out';
         }, 10);
     }
 }
 
-// Inicializar com uma mensagem aleatória
-window.addEventListener('load', function() {
-    mensagemAtual = obterMensagemAleatoria();
-});
+// Garante que a função está disponível globalmente
+window.abrirEnvelope = abrirEnvelope;
