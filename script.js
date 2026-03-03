@@ -1,7 +1,7 @@
 // Todas as mensagens românticas
 const mensagens = [
     "Feliz aniversário! Que este novo ciclo traga tudo de melhor para você!",
-    "Indepedente de qualquer coisa sempre vou te amar",
+    "Indepedente de qualquer coisa sempre vou te amar", // VÍRGULA ADICIONADA
     "Desejo que sua vida seja repleta de alegrias, conquistas e momentos especiais!",
     "Que cada dia do seu novo ano de vida seja abençoado com felicidade e paz!",
     "Você merece todo o amor e felicidade do mundo! Tenha um dia maravilhoso!",
@@ -39,44 +39,34 @@ let cartaAberta = false;
 
 // Função para pegar mensagem aleatória (sem repetir)
 function pegarMensagem() {
-    // Se já leu todas, recomeça
     if (mensagensLidas.length === mensagens.length) {
         mensagensLidas = [];
     }
     
-    // Filtra as mensagens ainda não lidas
     const disponiveis = mensagens.filter(msg => !mensagensLidas.includes(msg));
-    
-    // Escolhe uma aleatória
     const escolhida = disponiveis[Math.floor(Math.random() * disponiveis.length)];
-    
-    // Marca como lida
     mensagensLidas.push(escolhida);
     
     return escolhida;
 }
 
-// Função principal - chamada ao clicar
+// Função principal com efeito de abrir/fechar
 function abrirEnvelope() {
     const envelope = document.querySelector('.envelope-container');
     const carta = document.getElementById('mensagem');
     
-    // Se não estiver aberta ainda
     if (!cartaAberta) {
         // Abre o envelope
         envelope.classList.add('aberto');
-        // Coloca a primeira mensagem
         carta.textContent = pegarMensagem();
         cartaAberta = true;
     } else {
-        // Se já está aberta, só troca a mensagem
-        carta.textContent = pegarMensagem();
-        
-        // Pequena animação de pulsar
-        carta.style.animation = 'none';
-        setTimeout(() => {
-            carta.style.animation = 'pulsar 0.5s ease-in-out';
-        }, 10);
+        // Fecha o envelope se clicar novamente (opcional)
+        if (envelope.classList.contains('aberto')) {
+            envelope.classList.remove('aberto');
+            cartaAberta = false;
+            carta.textContent = ''; // Limpa a mensagem ao fechar
+        }
     }
 }
 
